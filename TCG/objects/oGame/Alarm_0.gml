@@ -13,7 +13,12 @@ switch global.state{
 		
 		if instance_exists(oMenu) instance_destroy(oMenu);
 		instance_create_depth(x,y,depth,oMenu);
-
+		break;
+	
+	case STATE.MENU_ACCOUNT:
+		
+		if instance_exists(oMenu) instance_destroy(oMenu);
+		instance_create_depth(x,y,depth,oMenu);
 		break;
 		
 	case STATE.MENU_PAUSE:

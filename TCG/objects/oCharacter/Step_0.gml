@@ -5,7 +5,7 @@ if (status == 0){
 	if (array_length(_array) == 1){			// ONE CHARACTERS
 		handPosition = 0;
 		targetX = cardPositionCenter - sprite_width/2;
-	} else if (array_length(_array == 2)){  // TWO CHARACTERS
+	} else if (array_length(_array) == 2){  // TWO CHARACTERS
 		if (_array[0] < _array[1]){
 			if (arrayPosition == 0) handPosition = 0;
 			else handPosition = 1;

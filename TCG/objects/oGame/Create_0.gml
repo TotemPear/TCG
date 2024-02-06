@@ -6,6 +6,8 @@ global.hoveredObjects = [];
 global.currentSelected = noone;
 global.skillsShown = false;
 global.state = STATE.MENU_MAIN;
+
+global.logedIn = false;
 #endregion
 hoveredID = noone;
 #region Music
@@ -47,7 +49,7 @@ musicPlaylistChill = array_shuffle([
 
 isChangingSongs = false;
 musicCurrent = 0;
-playMusic = false;
+playMusic = true;
 
 
 /// @function music_set_playlist(playlist, [shuffle])
