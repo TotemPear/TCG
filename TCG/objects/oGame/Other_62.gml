@@ -1,10 +1,3 @@
-if async_load[?"id"] == newVersionFileRequest {
-	if async_load[?"status"] == 0 {
-		newVersionDownloaded = true;
-		show_debug_message("Finished Downloading!");
-	}
-}
-
 if (request_is_succesful(versionCheckRequest)){
 	var _newVersion = json_decode(async_load[?"result"]);
 	//_newVersion = string_delete(_newVersion,1,1);

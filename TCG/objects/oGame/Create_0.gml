@@ -113,8 +113,6 @@ musicTextTimer = musicTextTimerLength;
 
 switch_state(STATE.MENU_MAIN);
 
-newVersionFileRequest = undefined;
-
 versionCheckRequest = undefined;
 
 global.isNewVersion = false;

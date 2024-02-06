@@ -45,7 +45,7 @@ if (isChangingSongs){
 }
 
 if (!global.newVersion) && (versionCheckRequest == undefined){
-	
+	// idk what this is
 }
 
 

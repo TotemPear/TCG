@@ -5,7 +5,6 @@
 function request_make(_url,_type,_body = ""){
 	if (_body != ""){
 		var _jsonNote = json_encode(_body);
-		ds_map_destroy(_body);
 	} else{
 		_jsonNote = "";
 	}
@@ -29,6 +28,7 @@ function request_get_result(_request, _failure = "Failure"){
 			return _failure;
 		}
 	}
+	return undefined;
 }
 
 /// @function request_is_succesful(request_id)

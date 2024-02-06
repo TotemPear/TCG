@@ -121,6 +121,7 @@
     {"name":"__scribble_get_buffer_b","order":3,"path":"scripts/__scribble_get_buffer_b/__scribble_get_buffer_b.yy",},
     {"name":"scribble_super_glyph_delete","order":4,"path":"scripts/scribble_super_glyph_delete/scribble_super_glyph_delete.yy",},
     {"name":"fGood","order":4,"path":"fonts/fGood/fGood.yy",},
+    {"name":"scClasses","path":"scripts/scClasses/scClasses.yy","order":3,},
     {"name":"sCardDefault","order":3,"path":"sprites/sCardDefault/sCardDefault.yy",},
     {"name":"__scribble_font_add_from_project","order":7,"path":"scripts/__scribble_font_add_from_project/__scribble_font_add_from_project.yy",},
     {"name":"__shd_scribble_bake_outline_4dir","order":1,"path":"shaders/__shd_scribble_bake_outline_4dir/__shd_scribble_bake_outline_4dir.yy",},
