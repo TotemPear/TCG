@@ -126,28 +126,29 @@ function ease_in_out(_time, _begin, _change, _duration){
 function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = undefined){
 	with (oGame){
 		global.state = _state
-		stateArgument1 = _arg1
-		stateArgument2 = _arg2
-		stateArgument3 = _arg3
-	
+		
 		alarm_set(0,1);
 		switch global.state{
 			case STATE.MENU_MAIN:
-				if (room != rMenu) room_goto(rMenu);
-
-				break;
 			case STATE.MENU_DECK:
-				if (room != rMenu) room_goto(rMenu);
-			
-				break;
 			case STATE.MENU_ACCOUNT:
+			default:
+
 				if (room != rMenu) room_goto(rMenu);
 			
 				break;
+				
 			case STATE.MENU_PAUSE:
 			
 				break;
+			
+			case STATE.MATCHMAKING:
+				
+				if (room != rMatchmaking) room_goto(rMatchmaking)
+			
 			case STATE.GAME:
+				global.againstAI = _arg1;
+			
 				if (room != rGame) room_goto(rGame);
 
 				break;

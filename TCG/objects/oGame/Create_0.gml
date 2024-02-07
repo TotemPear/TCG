@@ -7,6 +7,8 @@ global.currentSelected = noone;
 global.skillsShown = false;
 global.state = STATE.MENU_MAIN;
 
+global.againstAI = false;
+global.username = "Guest" = string(irandom_range(0,9999))
 global.logedIn = false;
 #endregion
 hoveredID = noone;

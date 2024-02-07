@@ -17,6 +17,7 @@ menu_itemheight = font_get_size(menu_font);
 menu_committed = -1;
 menu_control = true;
 
+menu[0] = "Back";
 switch(global.state){
 	case STATE.MENU_MAIN: default:
 		menu[3] = "Play";
@@ -25,15 +26,18 @@ switch(global.state){
 		menu[0] = "Exit";
 		break;
 		
+	case STATE.MENU_GAME:
+		menu[2] = "Play Online"
+		menu[1] = "Play against AI"
+		break;
+		
 	case STATE.MENU_ACCOUNT:
 		if (!global.logedIn){
 			menu[1] = "Log in";
-			menu[0] = "Back";
 		} else{
 			menu[3] = "Log out";
 			menu[2] = "Change username";
 			menu[1] = "Change password";
-			menu[0] = "Back";
 		}
 		break;
 	

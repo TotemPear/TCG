@@ -28,20 +28,38 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 				case 4:
 					url_open($"https://github.com/TotemPear/TCG/releases/download/v{global.newVersion}{SUB_VERSION}/TCG.exe");
 					game_end();
+					break;
+					
 				case 3: default:
 					switch_state(STATE.GAME);
 					break;
+					
 				case 2:
 					switch_state(STATE.MENU_DECK);
 					break;
 				case 1:
 					switch_state(STATE.MENU_ACCOUNT);
 					break;
+					
 				case 0:
 					game_end();
 					break;
 			}
 			break;
+			
+		case STATE.MENU_GAME:
+			switch(menu_committed){
+				case 2:
+					switch_state(STATE.MATCHMAKING);
+					break;
+					
+				case 1:
+					switch_state(STATE.GAME,true);
+					break;
+					
+				case 0: default:
+					switch_state(STATE.MENU_MAIN);
+			}
 		
 		case STATE.MENU_ACCOUNT:
 			switch (menu_committed){
@@ -52,6 +70,7 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 					
 					switch_state(STATE.MENU_ACCOUNT);
 					break;
+					
 				case 2:
 					// Change username
 					
@@ -59,6 +78,7 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 					
 					switch_state(STATE.MENU_ACCOUNT);
 					break;
+					
 				case 1:
 					if (global.logedIn){
 						// Change password
