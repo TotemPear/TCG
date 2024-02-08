@@ -138,7 +138,6 @@
     {"id":{"name":"scribble_external_sound_remove","path":"scripts/scribble_external_sound_remove/scribble_external_sound_remove.yy",},},
     {"id":{"name":"draw_text_scribble","path":"scripts/draw_text_scribble/draw_text_scribble.yy",},},
     {"id":{"name":"mJazz10","path":"sounds/mJazz10/mJazz10.yy",},},
-    {"id":{"name":"rMatchmaking","path":"rooms/rMatchmaking/rMatchmaking.yy",},},
     {"id":{"name":"mJazz09","path":"sounds/mJazz09/mJazz09.yy",},},
     {"id":{"name":"scribble_anim_rainbow","path":"scripts/scribble_anim_rainbow/scribble_anim_rainbow.yy",},},
     {"id":{"name":"__shd_scribble_msdf","path":"shaders/__shd_scribble_msdf/__shd_scribble_msdf.yy",},},

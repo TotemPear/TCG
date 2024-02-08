@@ -122,3 +122,4 @@ global.newVersion = -1;
 
 versionCheckRequest = request_make("system","GET");
 
+stateFunction = function(){}

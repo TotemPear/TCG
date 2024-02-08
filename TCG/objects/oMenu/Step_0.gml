@@ -61,6 +61,21 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 					switch_state(STATE.MENU_MAIN);
 			}
 		
+		case STATE.MENU_MATCHMAKING:
+			switch(menu_committed){
+				case 2:
+					switch_state(STATE.MATCHMAKING, true);
+					break;
+				
+				case 1:
+					switch_state(STATE.MATCHMAKING, false);
+					break;
+				
+				case 0: default:
+					switch_state(STATE.MENU_GAME);
+					break;
+			}
+		
 		case STATE.MENU_ACCOUNT:
 			switch (menu_committed){
 				case 3:

@@ -123,32 +123,69 @@ function ease_in_out(_time, _begin, _change, _duration){
 	return -_change/2 * (_time * (_time-2) -1) + _begin;
 }
 
+function get_keyboard_input(_limit){
+	if string_length(keyboard_string) > _limit{
+		keyboard_string = string_copy(keyboard_string, 1, 15);
+	}
+	return keyboard_string;
+}
+
 function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = undefined){
 	with (oGame){
 		global.state = _state
 		
 		alarm_set(0,1);
 		switch global.state{
-			case STATE.MENU_MAIN:
-			case STATE.MENU_DECK:
-			case STATE.MENU_ACCOUNT:
 			default:
-
+				stateFunction = function(){}
+				break;
+			
+			case STATE.MENU_MAIN:
+				stateFunction = function(){
+					if instance_exists(oMenu) instance_destroy(oMenu);
+					instance_create_depth(x,y,depth,oMenu);
+				}
 				if (room != rMenu) room_goto(rMenu);
 			
 				break;
-				
-			case STATE.MENU_PAUSE:
 			
+			case STATE.MENU_GAME:
+				stateFunction = function(){}
+				if (room != rMenu) room_goto(rMenu);
+				break;
+				
+			case STATE.MENU_MATCHMAKING:
+				stateFunction = function(){}
+				if (room != rMenu) room_goto(rMenu);
+				break;
+			
+			case STATE.MENU_DECK:
+				stateFunction = function(){}
+				if (room != rMenu) room_goto(rMenu);
+				break;
+			
+			case STATE.MENU_ACCOUNT:
+				stateFunction = function(){}
+				if (room != rMenu) room_goto(rMenu);
 				break;
 			
 			case STATE.MATCHMAKING:
-				
-				if (room != rMatchmaking) room_goto(rMatchmaking)
+				stateFunction = function(){
+					if instance_exists(oMatchmaker) instance_destroy(oMatchmaker);
+					instance_create_depth(x,y,depth,oMatchmaker,{creating : _arg1});
+				}
+				if (room != rMenu) room_goto(rMenu);
+				break;
+			
+			
+			case STATE.MENU_PAUSE:
+				stateFunction = function(){}
+				break;
 			
 			case STATE.GAME:
+				stateFunction = function(){}
 				global.againstAI = _arg1;
-			
+				
 				if (room != rGame) room_goto(rGame);
 
 				break;

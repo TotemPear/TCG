@@ -27,9 +27,14 @@ switch(global.state){
 		break;
 		
 	case STATE.MENU_GAME:
-		menu[2] = "Play Online"
-		menu[1] = "Play against AI"
+		menu[2] = "Multiplayer"
+		menu[1] = "Solo"
 		break;
+		
+	case STATE.MENU_MATCHMAKING:
+		menu[2] = "Create match";
+		menu[1] = "Join game";
+		break
 		
 	case STATE.MENU_ACCOUNT:
 		if (!global.logedIn){
