@@ -116,6 +116,7 @@ function do_animation(_image_index,_image_speed,_image_timer,_image_number){
 	}
 }
 
+/// @pure
 function ease_in_out(_time, _begin, _change, _duration){
 	_time /= _duration/2;
 	if (_time < 1) return _change/2*_time*_time + _begin;
@@ -123,11 +124,42 @@ function ease_in_out(_time, _begin, _change, _duration){
 	return -_change/2 * (_time * (_time-2) -1) + _begin;
 }
 
-function get_keyboard_input(_limit){
+/// @arg {real} limit
+function keyboard_get_input(_limit){
 	if string_length(keyboard_string) > _limit{
 		keyboard_string = string_copy(keyboard_string, 1, 15);
 	}
+	
 	return keyboard_string;
+}
+
+function Box() constructor{
+	sprite_index = sPlaceholder;
+	image_index = 0;
+	x = 0;
+	y = 0;
+	image_xscale = 1;
+	image_yscale = 1;
+	image_angle = 0;
+	image_blend = c_white;
+	image_alpha = 1;
+	
+	static draw = function(){
+		draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
+	}
+}
+
+/// {Asset.GMSprite} sprite
+/// {real} width
+/// @pure
+function make_sprite_width(_sprite, _width){
+	return _width / sprite_get_width(_sprite);
+}
+/// {Asset.GMSprite} sprite
+/// {real} height
+/// @pure
+function make_sprite_height(_sprite, _height){
+	return _height / sprite_get_height(_sprite);
 }
 
 function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = undefined){
