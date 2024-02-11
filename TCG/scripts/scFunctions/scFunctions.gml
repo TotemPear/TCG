@@ -182,12 +182,18 @@ function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = unde
 				break;
 			
 			case STATE.MENU_GAME:
-				stateFunction = function(){}
+				stateFunction = function(){
+					if instance_exists(oMenu) instance_destroy(oMenu);
+					instance_create_depth(x,y,depth,oMenu);
+				}
 				if (room != rMenu) room_goto(rMenu);
 				break;
 				
 			case STATE.MENU_MATCHMAKING:
-				stateFunction = function(){}
+				stateFunction = function(){
+					if instance_exists(oMenu) instance_destroy(oMenu);
+					instance_create_depth(x,y,depth,oMenu);
+				}
 				if (room != rMenu) room_goto(rMenu);
 				break;
 			
@@ -197,7 +203,10 @@ function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = unde
 				break;
 			
 			case STATE.MENU_ACCOUNT:
-				stateFunction = function(){}
+				stateFunction = function(){
+					if instance_exists(oMenu) instance_destroy(oMenu);
+					instance_create_depth(x,y,depth,oMenu);
+				}
 				if (room != rMenu) room_goto(rMenu);
 				break;
 			

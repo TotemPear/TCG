@@ -25,11 +25,6 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 	switch (global.state){
 		case STATE.MENU_MAIN: default:
 			switch (menu_committed){
-				case 4:
-					url_open($"https://github.com/TotemPear/TCG/releases/download/v{global.newVersion}{SUB_VERSION}/TCG.exe");
-					game_end();
-					break;
-					
 				case 3: default:
 					switch_state(STATE.MENU_GAME);
 					break;
@@ -50,7 +45,7 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 		case STATE.MENU_GAME:
 			switch(menu_committed){
 				case 2:
-					switch_state(STATE.MATCHMAKING);
+					switch_state(STATE.MENU_MATCHMAKING);
 					break;
 					
 				case 1:
@@ -60,6 +55,7 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 				case 0: default:
 					switch_state(STATE.MENU_MAIN);
 			}
+			break;
 		
 		case STATE.MENU_MATCHMAKING:
 			switch(menu_committed){
@@ -75,6 +71,7 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 					switch_state(STATE.MENU_GAME);
 					break;
 			}
+			break;
 		
 		case STATE.MENU_ACCOUNT:
 			switch (menu_committed){
@@ -154,19 +151,8 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 					switch_state(STATE.MENU_MAIN)
 					break;
 			}
-		break;
+			break;
 	}
-}
-
-
-switch(global.state){
-	case STATE.MENU_MAIN: default:
-		if (global.isNewVersion){
-			menu[4] = "[rainbow]Update";
-		} else if (array_length(menu) == 5){
-			array_delete(menu,4,1);
-		}
-		break;
 }
 
 menu_items = array_length(menu);
