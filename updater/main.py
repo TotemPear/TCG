@@ -102,7 +102,7 @@ while not is_working:
             mkdir(directory + "data")
 
             print("Starting download...")
-            download_url = "https://github.com/TotemPear/TCG/releases/download/v" + new_version + "-" + new_sub + "/TCG.zip"
+            download_url = "https://github.com/TotemPear/TCG/releases/download/v" + new_version + "-" + new_sub + "/data.zip"
 
             download_file(download_url, directory + "data/download.zip")
 
