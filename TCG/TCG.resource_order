@@ -106,7 +106,6 @@
     {"name":"scribble_kerning_pair_get","order":18,"path":"scripts/scribble_kerning_pair_get/scribble_kerning_pair_get.yy",},
     {"name":"scribble_external_sound_remove","order":2,"path":"scripts/scribble_external_sound_remove/scribble_external_sound_remove.yy",},
     {"name":"mJazz10","order":30,"path":"sounds/mJazz10/mJazz10.yy",},
-    {"name":"rMatchmaking","order":3,"path":"rooms/rMatchmaking/rMatchmaking.yy",},
     {"name":"mJazz09","order":29,"path":"sounds/mJazz09/mJazz09.yy",},
     {"name":"scribble_anim_rainbow","order":4,"path":"scripts/scribble_anim_rainbow/scribble_anim_rainbow.yy",},
     {"name":"__shd_scribble_msdf","order":5,"path":"shaders/__shd_scribble_msdf/__shd_scribble_msdf.yy",},

@@ -214,7 +214,6 @@
     {"roomId":{"name":"rInit","path":"rooms/rInit/rInit.yy",},},
     {"roomId":{"name":"rGame","path":"rooms/rGame/rGame.yy",},},
     {"roomId":{"name":"rMenu","path":"rooms/rMenu/rMenu.yy",},},
-    {"roomId":{"name":"rMatchmaking","path":"rooms/rMatchmaking/rMatchmaking.yy",},},
   ],
   "TextureGroups": [
     {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","ConfigValues":{"Debug":{"groupParent":"null","compressFormat":"bz2","loadType":"default",},},"directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},

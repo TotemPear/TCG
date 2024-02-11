@@ -3,16 +3,15 @@ if (request_is_succesful(versionCheckRequest)){
 	//_newVersion = string_delete(_newVersion,1,1);
 	//_newVersion = string_delete(_newVersion,string_length(_newVersion),1);
 	
-	show_debug_message(_newVersion[?"sub-version"]);
-	show_debug_message(_newVersion[?"version"]);
+	//show_debug_message(_newVersion[?"sub-version"]);
+	//show_debug_message(_newVersion[?"version"]);
 	
 	global.newVersion = _newVersion[?"version"];
 	
 	var _sub = string_delete(SUB_VERSION,1,1);
 	if _sub != _newVersion[?"sub-version"]{
 		if (_sub == "alpha"){
-			if (_newVersion[?"sub-version"] == "beta") global.isNewVersion = true;
-			else if (_newVersion[?"sub-version"] == "") global.isNewVersion = true;
+			if (_newVersion[?"sub-version"] == "beta") || (_newVersion[?"sub-version"] == "") global.isNewVersion = true;
 		} else if (_sub == "beta") && (_newVersion[?"sub-version"] == "") global.isNewVersion = true;
 	}
 	

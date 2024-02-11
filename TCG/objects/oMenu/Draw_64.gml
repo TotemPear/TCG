@@ -5,12 +5,11 @@ draw_set_valign(fa_bottom);
 for (var i = 0; i < menu_items; i++){
 	var _offset = 2;
 	var _txt = menu[i];
-	var _menu_color;
 	if (menu_cursor == i){
 		_txt = string_insert("> ",_txt,0);
-		_menu_color = color_selected;
+		var _menu_color = color_selected;
 	} else{
-		_menu_color = color_unselected;
+		var _menu_color = color_unselected;
 	}
 	var xx = menu_x;
 	var yy = menu_y - (menu_itemheight * (i * 1.5));
