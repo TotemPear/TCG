@@ -11,9 +11,6 @@ from zipfile import ZipFile
 
 is_running = "TCG.exe" in (p.name() for p in process_iter())
 
-if is_running: exit()
-
-
 def download_file(url, destination):
     # Send a GET request to the URL
     response = get(url, stream=True)
@@ -47,7 +44,7 @@ directory = "C:/Users/" + getuser() + "/AppData/Local/TCG/"
 if not isdir(directory):
     mkdir(directory)
 
-is_working = False
+is_working = is_running
 
 while not is_working:
     try:
@@ -131,16 +128,18 @@ while not is_working:
         print("A problem occured while trying to fetch update information.")
         try:
             startfile(directory + "data/TCG.exe")
+            is_working = True
         except FileNotFoundError:
             print("An error occured.")
 
-        exit()
+        is_working = True
 
-    if not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
-        download = True
-    else:
-        try:
-            startfile(directory + "data/TCG.exe")
-            is_working = True
-        except FileNotFoundError:
+    if not is_working:
+        if not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
             download = True
+        else:
+            try:
+                startfile(directory + "data/TCG.exe")
+                is_working = True
+            except FileNotFoundError:
+                download = True
