@@ -51,7 +51,7 @@ musicPlaylistChill = array_shuffle([
 
 isChangingSongs = false;
 musicCurrent = 0;
-playMusic = true;
+playMusic = false;
 
 
 /// @function music_set_playlist(playlist, [shuffle])
@@ -114,12 +114,5 @@ musicTextTimer = musicTextTimerLength;
 #endregion
 
 switch_state(STATE.MENU_MAIN);
-
-versionCheckRequest = undefined;
-
-global.isNewVersion = false;
-global.newVersion = -1;
-
-versionCheckRequest = request_make("system","GET");
 
 stateFunction = function(){}

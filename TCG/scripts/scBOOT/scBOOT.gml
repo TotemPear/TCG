@@ -42,7 +42,5 @@ if (!DEBUG_MODE){
 	audio_group_load(audiogroup_music);
 }
 
-#macro SUB_VERSION "-alpha"
-
 scribble_font_set_default("fDefault");
 
