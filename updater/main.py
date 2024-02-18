@@ -19,13 +19,14 @@ is_working = tcg_is_running or installer_is_running
 
 if __name__ == "__main__":
     while not is_working:
+
+        is_working = update.update(will_download)
+
         if isfile(directory + "download.zip"):
             try:
                 update.extract()
             except zipfile.BadZipfile:
                 remove(directory + "download.zip")
-
-        is_working = update.update(will_download)
 
         if not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
             will_download = True

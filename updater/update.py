@@ -120,10 +120,7 @@ def update(_download):
 
                 download_file(download_url, directory + "download.zip")
 
-                window.quit()
-
-                global currently_downloading
-                currently_downloading = False
+                window.destroy()
 
             window = tk.Tk()
 
@@ -142,14 +139,8 @@ def update(_download):
 
             window.wm_attributes("-topmost", True)
 
-
-            download_thread = threading.Thread(target=start_download)
-            download_thread.start()
-
-        
-            while currently_downloading:
-                window.mainloop()
-                print("loop")
+            window.after(500, start_download)
+            window.mainloop()
 
             extract()
 
