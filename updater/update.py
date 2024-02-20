@@ -2,7 +2,7 @@ from requests import get, ConnectionError
 from json import loads
 from configparser import ConfigParser
 from shutil import rmtree
-from tqdm import tqdm
+from tqdm import tqdm # Will be useless when updater is ready
 from zipfile import ZipFile, is_zipfile
 from os import remove, startfile, mkdir
 from os.path import isfile, isdir
@@ -32,6 +32,7 @@ def download_file(url, destination):
 
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
+        # REMOVE ALL OF THE FOLLOWING WHEN UPDATER IS READY
         # Open the destination file in binary write mode
         with open(destination, 'wb') as f:
             # Iterate over the content of the response in chunks
