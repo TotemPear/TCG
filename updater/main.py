@@ -6,10 +6,13 @@ from psutil import process_iter
 import update
 from collections import Counter
 from time import sleep
+from ctypes import windll
+from sys import exit
+from pyshortcuts import make_shortcut
 
 installer = False
 
-game_name = "TCG.exe"
+game_name = "BakaTCG.exe"
 
 # Get all running process names
 process_names = [p.name() for p in process_iter()]
@@ -18,13 +21,19 @@ process_names = [p.name() for p in process_iter()]
 process_counts = Counter(process_names)
 
 # Get the counts for specific programs
-updater_is_running = process_counts.get("tcg-updater.exe", 0) > 1
-tcg_is_running = "BakaTCG.exe" in process_counts
-installer_is_running = process_counts.get("TCG-Installer.exe", 0) > 1
+updater_is_running = process_counts.get("bakatcg-updater.exe", 0) > 2
+installer_is_running = process_counts.get("BakaTCG-Installer.exe", 0) > 2
 
-print("Is tcg-updater.exe already running", updater_is_running)
-print("Is TCG.exe running:", tcg_is_running)
-print("Is TCG-Installer.exe already running:", installer_is_running)
+print("Is bakatcg-updater.exe already running", updater_is_running)
+print("Is BakaTCG-Installer.exe already running:", installer_is_running)
+
+if installer_is_running:
+    if installer:
+        windll.user32.MessageBoxW(0, "The installer is already running.", 0)
+    else:
+        windll.user32.MessageBoxW(0, "The installer is currently running. Please wait for it to finish before opening the game.", "BakaTCG", 0)
+    exit()
+
 
 will_download = False
 
@@ -39,7 +48,7 @@ game_started = False
 if not isdir(directory):
     mkdir(directory)
 
-is_working = tcg_is_running or installer_is_running
+is_working = installer_is_running
 
 
 if __name__ == "__main__":
@@ -62,9 +71,12 @@ if __name__ == "__main__":
                     is_working = True
                 except FileNotFoundError:
                     will_download = True
-    else:
-        while not is_working:
 
+
+
+            make_shortcut(directory + "data/" + game_name, name=game_name, icon=directory + "data/" + game_name)
+    else:
+        while True:
 
             if not any(p.name() == "TCG.exe" for p in process_iter()):
                 if isfile(directory + "download.zip"):
@@ -80,10 +92,13 @@ if __name__ == "__main__":
                     try:
                         startfile(directory + "data/" + game_name)
                         game_started = True
+                        if updater_is_running: exit()
                         # is_working = True
                         sleep(3)
                     except FileNotFoundError:
                         will_download = True
+
+            if updater_is_running: exit()
 
             has_downloaded = update.update(will_download)
 
@@ -111,4 +126,3 @@ if __name__ == "__main__":
             if has_downloaded: extracted = update.extract()
 
             if game_started or extracted: exit()
-

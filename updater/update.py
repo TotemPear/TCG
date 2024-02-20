@@ -1,13 +1,16 @@
 from requests import get, ConnectionError
 from json import loads
 from configparser import ConfigParser
-from shutil import rmtree
-from tqdm import tqdm # Will be useless when updater is ready
+from shutil import rmtree, move
+# from tqdm import tqdm  # Will be useless when updater is ready
 from zipfile import ZipFile, is_zipfile
 from os import remove, startfile, mkdir
 from os.path import isfile, isdir
 from getpass import getuser
 import tkinter as tk
+
+
+installer = False
 
 directory = "C:/Users/" + getuser() + "/AppData/Local/BakaTCG/"
 
@@ -15,37 +18,42 @@ currently_downloading = True
 
 project_name = "TCG"
 
-game_name = "TCG.exe"
-
-installer = True # This is probably useless
+game_name = "BakaTCG.exe"
 
 
 def download_file(url, destination):
-    # Send a GET request to the URL
-    response = get(url, stream=True)
-
-    # Get the total file size in bytes
-    total_size = int(response.headers.get('content-length', 0))
-
-    # Initialize a tqdm progress bar with the total file size
-    progress_bar = tqdm(total=total_size, unit='B', unit_scale=True)
-
-    # Check if the request was successful (status code 200)
+    response = get(url)
     if response.status_code == 200:
-        # REMOVE ALL OF THE FOLLOWING WHEN UPDATER IS READY
-        # Open the destination file in binary write mode
         with open(destination, 'wb') as f:
-            # Iterate over the content of the response in chunks
-            for chunk in response.iter_content(chunk_size=1024):
-                # Write the chunk to the file
-                f.write(chunk)
-                # Update the progress bar with the size of the chunk
-                progress_bar.update(len(chunk))
-        # Close the progress bar
-        progress_bar.close()
-        # print("Download successful.")
+            f.write(response.content)
     else:
         download_file(url, destination)
+
+    # # Send a GET request to the URL
+    # response = get(url, stream=True)
+    #
+    # # Get the total file size in bytes
+    # total_size = int(response.headers.get('content-length', 0))
+    #
+    # # Initialize a tqdm progress bar with the total file size
+    # progress_bar = tqdm(total=total_size, unit='B', unit_scale=True)
+    #
+    # # Check if the request was successful (status code 200)
+    # if response.status_code == 200:
+    #     # REMOVE ALL THE FOLLOWING CODE WHEN UPDATER IS READY CUZ IT'S USELESS
+    #     # Open the destination file in binary write mode
+    #     with open(destination, 'wb') as f:
+    #         # Iterate over the content of the response in chunks
+    #         for chunk in response.iter_content(chunk_size=1024):
+    #             # Write the chunk to the file
+    #             f.write(chunk)
+    #             # Update the progress bar with the size of the chunk
+    #             progress_bar.update(len(chunk))
+    #     # Close the progress bar
+    #     progress_bar.close()
+    #     # print("Download successful.")
+    # else:
+    #     download_file(url, destination)
 
 
 def extract():
@@ -59,13 +67,38 @@ def extract():
 
         mkdir(directory + "data")
 
-        # Open your .zip file
-        with ZipFile(file=directory + "download.zip") as zip_file:
-            # Loop over each file
-            for file in tqdm(iterable=zip_file.namelist(), total=len(zip_file.namelist())):
-                # Extract each file to another directory
-                # If you want to extract to current working directory, don't specify path
-                zip_file.extract(member=file, path=directory + "data/")
+        file_to_skip = "bakatcg-updater.exe"  # Adjust this to the name of the file you want to skip
+
+        if isfile(file_to_skip):
+            if not installer:
+                with ZipFile(directory + "download.zip", 'r') as zip_ref:
+                    for file_info in zip_ref.infolist():
+                        # Check if the current file is the one to skip
+                        if file_info.filename == file_to_skip:
+                            print(f"Skipping {file_to_skip}")
+                            continue  # Skip extracting this file
+                        # Extract other files
+                        zip_ref.extract(file_info, directory + "data/")
+            else:
+                remove(directory + file_to_skip)
+                with ZipFile(directory + "download.zip", 'r') as zip_ref:
+                    zip_ref.extractall(directory + "data/")
+
+                move(directory + "data/" + file_to_skip, directory)
+        else:
+            with ZipFile(directory + "download.zip", 'r') as zip_ref:
+                zip_ref.extractall(directory + "data/")
+
+            move(directory + "data/" + file_to_skip, directory)
+
+
+        # # Open your .zip file
+        # with ZipFile(file=directory + "download.zip") as zip_file:
+        #     # Loop over each file
+        #     for file in tqdm(iterable=zip_file.namelist(), total=len(zip_file.namelist())):
+        #         # Extract each file to another directory
+        #         # If you want to extract to current working directory, don't specify path
+        #         zip_file.extract(member=file, path=directory + "data/")
 
         remove(directory + "download.zip")
         return True
@@ -147,8 +180,6 @@ def install(download=False):
 
             window.title("BakaTCG")
 
-            window.iconbitmap("TCG.ico")
-
             window.overrideredirect(True)
 
             window.geometry(
@@ -175,7 +206,7 @@ def install(download=False):
             with open(directory + "info.ini", 'w') as configfile:  # save
                 config.write(configfile)
 
-            update_working = True # PROBABLY WORKS IDK
+            update_working = True  # PROBABLY WORKS IDK
     except ConnectionError:
         print("A problem occurred while trying to fetch update information.")
         try:
