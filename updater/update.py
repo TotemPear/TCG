@@ -17,7 +17,7 @@ project_name = "TCG"
 
 game_name = "TCG.exe"
 
-installer = True
+installer = True # This is probably useless
 
 
 def download_file(url, destination):
