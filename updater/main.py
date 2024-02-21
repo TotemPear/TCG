@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
 
 
-            make_shortcut(directory + "data/" + game_name, name=game_name, icon=directory + "data/" + game_name)
+            make_shortcut(directory + "bakatcg-updater.exe", name="BakaTCG", icon=directory + "data/" + game_name)
     else:
         while True:
 
@@ -120,7 +120,7 @@ if __name__ == "__main__":
             #     except FileNotFoundError:
             #         will_download = True
 
-            while any(p.name() == "TCG.exe" for p in process_iter()):
+            while any(p.name() == game_name for p in process_iter()):
                 update.update()
 
             if has_downloaded: extracted = update.extract()

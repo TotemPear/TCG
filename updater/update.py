@@ -69,7 +69,7 @@ def extract():
 
         file_to_skip = "bakatcg-updater.exe"  # Adjust this to the name of the file you want to skip
 
-        if isfile(file_to_skip):
+        if isfile(directory + file_to_skip):
             if not installer:
                 with ZipFile(directory + "download.zip", 'r') as zip_ref:
                     for file_info in zip_ref.infolist():
