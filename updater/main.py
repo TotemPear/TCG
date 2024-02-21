@@ -1,145 +1,128 @@
-from requests import get, ConnectionError
+import zipfile
 from os import startfile, mkdir, remove
 from getpass import getuser
 from os.path import isfile, isdir
-from json import loads
-from configparser import ConfigParser
-from shutil import rmtree
 from psutil import process_iter
-from tqdm import tqdm
-from zipfile import ZipFile
+import update
+from collections import Counter
+from time import sleep
+from ctypes import windll
+from sys import exit
+from pyshortcuts import make_shortcut
 
-is_running = "TCG.exe" in (p.name() for p in process_iter())
+installer = False
 
-def download_file(url, destination):
-    # Send a GET request to the URL
-    response = get(url, stream=True)
+game_name = "BakaTCG.exe"
 
-    # Get the total file size in bytes
-    total_size = int(response.headers.get('content-length', 0))
+# Get all running process names
+process_names = [p.name() for p in process_iter()]
 
-    # Initialize a tqdm progress bar with the total file size
-    progress_bar = tqdm(total=total_size, unit='B', unit_scale=True)
+# Count the number of instances of each program
+process_counts = Counter(process_names)
 
-    # Check if the request was successful (status code 200)
-    if response.status_code == 200:
-        # Open the destination file in binary write mode
-        with open(destination, 'wb') as f:
-            # Iterate over the content of the response in chunks
-            for chunk in response.iter_content(chunk_size=1024):
-                # Write the chunk to the file
-                f.write(chunk)
-                # Update the progress bar with the size of the chunk
-                progress_bar.update(len(chunk))
-        # Close the progress bar
-        progress_bar.close()
-        # print("Download successful.")
+# Get the counts for specific programs
+updater_is_running = process_counts.get("bakatcg-updater.exe", 0) > 2
+installer_is_running = process_counts.get("BakaTCG-Installer.exe", 0) > 2
+
+print("Is bakatcg-updater.exe already running", updater_is_running)
+print("Is BakaTCG-Installer.exe already running:", installer_is_running)
+
+if installer_is_running:
+    if installer:
+        windll.user32.MessageBoxW(0, "The installer is already running.", 0)
     else:
-        download_file(url, destination)
+        windll.user32.MessageBoxW(0, "The installer is currently running. Please wait for it to finish before opening the game.", "BakaTCG", 0)
+    exit()
 
 
-download = False
+will_download = False
 
-directory = "C:/Users/" + getuser() + "/AppData/Local/TCG/"
+directory = "C:/Users/" + getuser() + "/AppData/Local/BakaTCG/"
+
+has_downloaded = False
+
+extracted = False
+
+game_started = False
+
 if not isdir(directory):
     mkdir(directory)
 
-is_working = is_running
+is_working = installer_is_running
 
-while not is_working:
-    try:
-        new_version = loads(get("https://baka-tcg-default-rtdb.firebaseio.com/system/.json").text)
 
-        new_sub = new_version["sub-version"]
-        new_version = new_version["version"]
+if __name__ == "__main__":
+    if installer:
+        while not is_working:
 
-        # print("C:/Users/"+getuser()+"/AppData/Local/TCG")
+            is_working = update.install(will_download)
+            if not any(p.name() == "TCG.exe" for p in process_iter()):
+                if isfile(directory + "download.zip"):
+                    try:
+                        update.extract()
+                    except zipfile.BadZipfile:
+                        remove(directory + "download.zip")
 
-        sub = "alpha"
-        version = "0"
+            if not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
+                will_download = True
+            else:
+                try:
+                    startfile(directory + "data/" + game_name)
+                    is_working = True
+                except FileNotFoundError:
+                    will_download = True
 
-        if isfile(directory + "info.ini"):
-            config = ConfigParser()
-            config.read(directory + "info.ini")
-            try:
-                sub = config["Version"]["Sub-Version"]
-                version = config["Version"]["Version"]
-            except KeyError:
-                download = True
 
-            if sub != new_sub:
-                if sub == "alpha":
-                    if new_sub == "beta" or new_sub == "":
-                        download = True
-                elif sub == "beta" and new_sub == "":
-                    download = True
-        else:
-            download = True
 
-        if not download:
-            new_array = new_version.split(".")
-            old_array = version.split(".")
+            make_shortcut(directory + "bakatcg-updater.exe", name="BakaTCG", icon=directory + "data/" + game_name)
+    else:
+        while True:
 
-            while len(new_array) > len(old_array):
-                old_array.append("0")
-            while len(old_array) > len(new_array):
-                new_array.append("0")
+            if not any(p.name() == "TCG.exe" for p in process_iter()):
+                if isfile(directory + "download.zip"):
+                    try:
+                        update.extract()
+                    except zipfile.BadZipfile:
+                        remove(directory + "download.zip")
+                if not isdir(directory + "data/"):
+                    will_download = True
+                elif not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
+                    will_download = True
+                elif not game_started:
+                    try:
+                        startfile(directory + "data/" + game_name)
+                        game_started = True
+                        if updater_is_running: exit()
+                        # is_working = True
+                        sleep(3)
+                    except FileNotFoundError:
+                        will_download = True
 
-            for i in range(len(new_array)):
-                if int(new_array[i]) > int(old_array[i]):
-                    download = True
-                    break
-                elif int(old_array[i]) > int(new_array[i]):
-                    break
+            if updater_is_running: exit()
 
-        if isdir(directory + "data"):
-            if download:
-                rmtree(directory + "data")
-        else:
-            download = True
+            has_downloaded = update.update(will_download)
 
-        if download:
-            mkdir(directory + "data")
+            # if isfile(directory + "download.zip"):
+            #     try:
+            #         update.extract()
+            #     except zipfile.BadZipfile:
+            #         remove(directory + "download.zip")
+            # if not isdir(directory + "data/"):
+            #     will_download = True
+            # elif not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
+            #     will_download = True
+            # elif not game_started:
+            #     try:
+            #         startfile(directory + "data/" + game_name)
+            #         game_started = True
+            #         # is_working = True
+            #         sleep(3)
+            #     except FileNotFoundError:
+            #         will_download = True
 
-            print("Starting download...")
-            download_url = "https://github.com/TotemPear/TCG/releases/download/v" + new_version + "-" + new_sub + "/data.zip"
+            while any(p.name() == game_name for p in process_iter()):
+                update.update()
 
-            download_file(download_url, directory + "data/download.zip")
+            if has_downloaded: extracted = update.extract()
 
-            print("Extracting files...")
-            # Open your .zip file
-            with ZipFile(file=directory + "data/download.zip") as zip_file:
-
-                # Loop over each file
-                for file in tqdm(iterable=zip_file.namelist(), total=len(zip_file.namelist())):
-                    # Extract each file to another directory
-                    # If you want to extract to current working directory, don't specify path
-                    zip_file.extract(member=file, path=directory + "data/")
-
-            remove(directory + "data/download.zip")
-
-            config = ConfigParser()
-            config["Version"] = {"Sub-Version": new_sub,
-                                 "Version": new_version}
-
-            with open(directory + "info.ini", 'w') as configfile:  # save
-                config.write(configfile)
-    except ConnectionError:
-        print("A problem occured while trying to fetch update information.")
-        try:
-            startfile(directory + "data/TCG.exe")
-            is_working = True
-        except FileNotFoundError:
-            print("An error occured.")
-
-        is_working = True
-
-    if not is_working:
-        if not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
-            download = True
-        else:
-            try:
-                startfile(directory + "data/TCG.exe")
-                is_working = True
-            except FileNotFoundError:
-                download = True
+            if game_started or extracted: exit()
