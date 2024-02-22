@@ -2,12 +2,10 @@ from requests import get, ConnectionError
 from json import loads
 from configparser import ConfigParser
 from shutil import rmtree, move
-# from tqdm import tqdm  # Will be useless when updater is ready
-from zipfile import ZipFile, is_zipfile
 from os import remove, startfile, mkdir
 from os.path import isfile, isdir
 from getpass import getuser
-import tkinter as tk
+
 
 
 installer = False
@@ -29,35 +27,9 @@ def download_file(url, destination):
     else:
         download_file(url, destination)
 
-    # # Send a GET request to the URL
-    # response = get(url, stream=True)
-    #
-    # # Get the total file size in bytes
-    # total_size = int(response.headers.get('content-length', 0))
-    #
-    # # Initialize a tqdm progress bar with the total file size
-    # progress_bar = tqdm(total=total_size, unit='B', unit_scale=True)
-    #
-    # # Check if the request was successful (status code 200)
-    # if response.status_code == 200:
-    #     # REMOVE ALL THE FOLLOWING CODE WHEN UPDATER IS READY CUZ IT'S USELESS
-    #     # Open the destination file in binary write mode
-    #     with open(destination, 'wb') as f:
-    #         # Iterate over the content of the response in chunks
-    #         for chunk in response.iter_content(chunk_size=1024):
-    #             # Write the chunk to the file
-    #             f.write(chunk)
-    #             # Update the progress bar with the size of the chunk
-    #             progress_bar.update(len(chunk))
-    #     # Close the progress bar
-    #     progress_bar.close()
-    #     # print("Download successful.")
-    # else:
-    #     download_file(url, destination)
-
 
 def extract():
-    print("Extracting files...")
+    from zipfile import ZipFile, is_zipfile
 
     if is_zipfile(directory + "download.zip"):
 
@@ -75,7 +47,6 @@ def extract():
                     for file_info in zip_ref.infolist():
                         # Check if the current file is the one to skip
                         if file_info.filename == file_to_skip:
-                            print(f"Skipping {file_to_skip}")
                             continue  # Skip extracting this file
                         # Extract other files
                         zip_ref.extract(file_info, directory + "data/")
@@ -91,15 +62,6 @@ def extract():
 
             move(directory + "data/" + file_to_skip, directory)
 
-
-        # # Open your .zip file
-        # with ZipFile(file=directory + "download.zip") as zip_file:
-        #     # Loop over each file
-        #     for file in tqdm(iterable=zip_file.namelist(), total=len(zip_file.namelist())):
-        #         # Extract each file to another directory
-        #         # If you want to extract to current working directory, don't specify path
-        #         zip_file.extract(member=file, path=directory + "data/")
-
         remove(directory + "download.zip")
         return True
     elif isfile(directory + "download.zip"):
@@ -114,8 +76,6 @@ def check_version():
 
     new_sub = new_version["sub-version"]
     new_version = new_version["version"]
-
-    # print("C:/Users/"+getuser()+"/AppData/Local/TCG")
 
     sub = "alpha"
     version = "0"
@@ -159,6 +119,7 @@ def check_version():
 
 
 def install(download=False):
+    import tkinter as tk
     update_working = False
     try:
         is_new_version, new_sub, new_version = check_version()
@@ -169,7 +130,6 @@ def install(download=False):
 
         if download:
             def start_download():
-                print("Starting download...")
                 download_url = "https://github.com/TotemPear/" + project_name + "/releases/download/v" + new_version + "-" + new_sub + "/data.zip"
 
                 download_file(download_url, directory + "download.zip")
@@ -208,12 +168,9 @@ def install(download=False):
 
             update_working = True  # PROBABLY WORKS IDK
     except ConnectionError:
-        print("A problem occurred while trying to fetch update information.")
         try:
             startfile(directory + "data/" + game_name)
             update_working = True
-        except FileNotFoundError:
-            print("An error occurred.")
 
     return update_working
 
@@ -228,7 +185,6 @@ def update(download=False):
             download = True
 
         if download:
-            print("Starting download...")
             download_url = "https://github.com/TotemPear/" + project_name + "/releases/download/v" + new_version + "-" + new_sub + "/data.zip"
 
             download_file(download_url, directory + "download.zip")
@@ -241,12 +197,9 @@ def update(download=False):
 
             update_working = True  # PROBABLY WORKS IDK
     except ConnectionError:
-        print("A problem occurred while trying to fetch update information.")
         try:
             startfile(directory + "data/" + game_name)
             exit()
             update_working = True
-        except FileNotFoundError:
-            print("An error occurred.")
 
     return update_working
