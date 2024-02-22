@@ -9,4 +9,4 @@
 - Open the installer and wait for it to download :)
 
 > [!WARNING]
-> The executable and even the zip file in itself will probably get flagged as a virus by Windows Defender(or whatever antivirus you're using) so you will need to disable the antivirus before trying anything. Sorry but I can't do anything about that.😞
+> The executable and even the zip file in itself will probably get flagged as a virus by Windows Defender(or whatever antivirus you're using) so you will need to disable the antivirus before trying anything. Sorry but I can't do anything about that :/
