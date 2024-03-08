@@ -4,9 +4,9 @@
 
 ## Installation
 
-- Download the program [here]([https://github.com/TotemPear/TCG/releases/download/v0.0.3-alpha/BakaTCG.zip](https://github.com/TotemPear/TCG/releases/download/v0.0.4-alpha/BakaTCG-Installer.zip)).
-- Extract `BakaTCG-Installer.exe` from it and put it somewhere accesible such as your desktop.
-- Open the installer and wait for it to download :)
+1. Download the program [here](https://github.com/TotemPear/TCG/releases/download/v0.0.4-alpha/BakaTCG-Installer.zip).
+2. Extract `BakaTCG-Installer.exe` from it and put it somewhere accesible such as your desktop.
+3. Open the installer and wait for it to download :)
 
 > [!WARNING]
 > The executable and even the zip file in itself will probably get flagged as a virus by Windows Defender(or whatever antivirus you're using) so you will need to disable the antivirus before trying anything. Sorry but I can't do anything about that :/

@@ -24,9 +24,6 @@ process_counts = Counter(process_names)
 updater_is_running = process_counts.get("bakatcg-updater.exe", 0) > 2
 installer_is_running = process_counts.get("BakaTCG-Installer.exe", 0) > 2
 
-print("Is bakatcg-updater.exe already running", updater_is_running)
-print("Is BakaTCG-Installer.exe already running:", installer_is_running)
-
 if installer_is_running:
     if installer:
         windll.user32.MessageBoxW(0, "The installer is already running.", 0)
