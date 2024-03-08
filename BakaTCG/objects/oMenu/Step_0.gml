@@ -49,7 +49,7 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 					break;
 					
 				case 1:
-					switch_state(STATE.GAME,true);
+					switch_state(STATE.GAME_MAIN,true);
 					break;
 					
 				case 0: default:
@@ -60,11 +60,11 @@ if (menu_x > gui_width+630) && (menu_committed != -1){
 		case STATE.MENU_MATCHMAKING:
 			switch(menu_committed){
 				case 2:
-					switch_state(STATE.GAME, true); // IMPORTANT - CHANGE TO STATE.MATCHMAKING WHEN MATCHMAKING IS DONE
+					switch_state(STATE.GAME_MAIN, true); // IMPORTANT - CHANGE TO STATE.MATCHMAKING WHEN MATCHMAKING IS DONE
 					break;
 				
 				case 1:
-					switch_state(STATE.GAME, false); // STATE.MATCHMAKING HERE TOO
+					switch_state(STATE.GAME_MAIN, false); // STATE.MATCHMAKING HERE TOO
 					break;
 				
 				case 0: default:

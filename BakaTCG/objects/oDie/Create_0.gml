@@ -4,27 +4,28 @@ targetY = y;
 moveSpeed = 0.01;
 hovered = false;
 switch(type){
-	case 0:
-	image_blend = c_blue;
+	case ELEMENT.GIGACHAD:
+	sprite_index = sprite_index;
 	break;
-	case 1:
-	image_blend = c_red;
+	case ELEMENT.BOZO:
+	sprite_index = sDieBozo;
 	break;
-	case 2:
-	image_blend = c_green;
+	case ELEMENT.DUMBASS:
+	sprite_index = sprite_index;
 	break;
-	case 3:
-	image_blend = c_aqua;
+	case ELEMENT.OLD:
+	sprite_index = sDieOld;
 	break;
 	case 4:
-	image_blend = c_orange;
+	sprite_index = sprite_index;
 	break;
 	case 5:
-	image_blend = c_purple;
+	sprite_index = sprite_index;
 	break;
 	case 6:
-	image_blend = c_maroon;
+	sprite_index = sprite_index;
 	break;
-	case 7:
-	image_blend = c_white;
+	case ELEMENT.OMNI:
+	sprite_index = sDieOmni;
+	break;
 }

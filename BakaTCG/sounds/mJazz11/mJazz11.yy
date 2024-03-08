@@ -1,26 +1,30 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "mJazz11",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+  "$GMSound":"",
+  "%Name":"mJazz11",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 0,
-  "ConfigValues": {
-    "Debug": {"audioGroupId":"{\"name\":\"audiogroup_music\",\"path\":\"audiogroups/audiogroup_music\"}",},
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "ConfigValues":{
+    "Debug":{
+      "audioGroupId":"{\"name\":\"audiogroup_music\",\"path\":\"audiogroups/audiogroup_music\"}",
+    },
   },
-  "conversionMode": 0,
-  "duration": 207.25551,
-  "parent": {
-    "name": "Music",
-    "path": "folders/Music.yy",
+  "conversionMode":0,
+  "duration":207.25551,
+  "name":"mJazz11",
+  "parent":{
+    "name":"Music",
+    "path":"folders/Music.yy",
   },
-  "preload": false,
-  "sampleRate": 44100,
-  "soundFile": "mJazz11.mp3",
-  "type": 0,
-  "volume": 1.0,
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"mJazz11.mp3",
+  "type":0,
+  "volume":1.0,
 }

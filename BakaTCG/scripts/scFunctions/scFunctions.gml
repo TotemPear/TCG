@@ -223,12 +223,23 @@ function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = unde
 				stateFunction = function(){}
 				break;
 			
-			case STATE.GAME:
-				stateFunction = function(){}
+			case STATE.GAME_START:
+				stateFunction = function(){switch_state(STATE.GAME_MAIN)}
 				global.againstAI = _arg1;
 				
 				if (room != rGame) room_goto(rGame);
-
+				break;
+			
+			case STATE.GAME_DICE:
+				stateFunction = function(){}
+				
+				if (room != rGame) room_goto(rGame);
+				break;
+			
+			case STATE.GAME_MAIN:
+				stateFunction = function(){}
+				
+				if (room != rGame) room_goto(rGame);
 				break;
 		}
 	}

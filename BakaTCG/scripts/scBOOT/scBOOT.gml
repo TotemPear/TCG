@@ -24,6 +24,16 @@ enum ELEMENT{
 	DAVID
 }
 
+//#macro ELEMENT_COLOR[ELEMENT.GIGACHAD] c_silver
+//#macro ELEMENT_COLOR[ELEMENT.BOZO] c_maroon
+//#macro ELEMENT_COLOR[ELEMENT.DUMBASS] c_aqua
+//#macro ELEMENT_COLOR[ELEMENT.OLD] c_green
+//#macro ELEMENT_COLOR[4] c_white
+//#macro ELEMENT_COLOR[5] c_white
+//#macro ELEMENT_COLOR[6] c_white
+//#macro ELEMENT_COLOR[ELEMENT.OMNI] c_white
+//#macro ELEMENT_COLOR[ELEMENT.DAVID] c_white
+
 enum STATE {
 	MENU_MAIN,
 	MENU_GAME,
@@ -31,7 +41,9 @@ enum STATE {
 	MENU_DECK,
 	MENU_ACCOUNT,
 	MENU_PAUSE,
-	GAME,
+	GAME_START,
+	GAME_MAIN,
+	GAME_DICE,
 	MATCHMAKING,
 	TOTAL
 }
