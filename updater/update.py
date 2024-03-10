@@ -113,8 +113,7 @@ def check_version():
                 break
             elif int(old_array[i]) > int(new_array[i]):
                 break
-    else:
-        is_new_version = True
+    
     return is_new_version, new_sub, new_version
 
 
