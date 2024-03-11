@@ -1,0 +1,4 @@
+data.zip way of things:
+
+Game files with bakatcg-updater.exe all in the same place.
+
