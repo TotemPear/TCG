@@ -1,5 +1,10 @@
 if (keyboard_check_pressed(ord("R"))){
-	game_restart();
+	if (keyboard_check(vk_control)){
+		game_restart();
+	} else{
+		switch_state(global.state);
+	}
+	
 }
 
 var _currenthovered = get_hovered();

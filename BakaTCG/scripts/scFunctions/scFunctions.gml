@@ -178,7 +178,8 @@ function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = unde
 					instance_create_depth(x,y,depth,oMenu);
 				}
 				if (room != rMenu) room_goto(rMenu);
-			
+				global.RPState = "In the main menu";
+				global.RPDetails = "";
 				break;
 			
 			case STATE.MENU_GAME:
@@ -187,6 +188,8 @@ function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = unde
 					instance_create_depth(x,y,depth,oMenu);
 				}
 				if (room != rMenu) room_goto(rMenu);
+				global.RPState = "In the main menu";
+				global.RPDetails = "";
 				break;
 				
 			case STATE.MENU_MATCHMAKING:
@@ -195,11 +198,15 @@ function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = unde
 					instance_create_depth(x,y,depth,oMenu);
 				}
 				if (room != rMenu) room_goto(rMenu);
+				global.RPState = "In the main menu";
+				global.RPDetails = "";
 				break;
 			
 			case STATE.MENU_DECK:
 				stateFunction = function(){}
 				if (room != rMenu) room_goto(rMenu);
+				global.RPState = "Editing their deck";
+				global.RPDetails = "";
 				break;
 			
 			case STATE.MENU_ACCOUNT:
@@ -208,6 +215,8 @@ function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = unde
 					instance_create_depth(x,y,depth,oMenu);
 				}
 				if (room != rMenu) room_goto(rMenu);
+				global.RPState = "In the settings";
+				global.RPDetails = "";
 				break;
 			
 			case STATE.MATCHMAKING:
@@ -216,31 +225,78 @@ function switch_state(_state, _arg1 = undefined, _arg2 = undefined, _arg3 = unde
 					instance_create_depth(x,y,depth,oMatchmaker,{creating : _arg1});
 				}
 				if (room != rMenu) room_goto(rMenu);
+				global.RPState = "Matchmaking";
+				global.RPDetails = "";
 				break;
-			
-			
-			case STATE.MENU_PAUSE:
-				stateFunction = function(){}
-				break;
-			
+				
 			case STATE.GAME_START:
 				stateFunction = function(){switch_state(STATE.GAME_MAIN)}
 				global.againstAI = _arg1;
 				
 				if (room != rGame) room_goto(rGame);
+				global.RPState = "In game";
+				global.RPDetails = "Starting game";
 				break;
 			
 			case STATE.GAME_DICE:
 				stateFunction = function(){}
 				
 				if (room != rGame) room_goto(rGame);
+				global.RPState = "In game"
+				global.RPDetails = "Choosing their dice"
+				
 				break;
 			
 			case STATE.GAME_MAIN:
 				stateFunction = function(){}
 				
 				if (room != rGame) room_goto(rGame);
+				global.RPState = "In game";
+				global.RPDetails = "";
 				break;
 		}
 	}
 }
+/// @function is_newer_version(version1, sub_version1, version2, sub_version2)
+/// @desc Returns 1 if the first version is newer, 0 if the second version is newer and -1 if they are the same.
+/// @arg {string} version1
+/// @arg {string} sub_version1
+/// @arg {string} version2
+/// @arg {string} sub_version2
+function is_newer_version(_ver1 = "0", _sub1 = "alpha", _ver2 = "0", _sub2 = "alpha"){
+	
+	if (_sub1 != _sub2){
+		if (_sub1 == "alpha"){
+			if (_sub2 == "beta") || (_sub2 == "") return 0;
+		} else if (_sub1 == "beta") {
+			if (_sub2 == "") return 0;
+			else if (_sub2 == "alpha") return 1;
+		} else if (_sub2 != "") return 1;
+	}
+	
+	var _array1 = string_split(_ver1, ".");
+	var _array2 = string_split(_ver2, ".");
+	
+	while (array_length(_array2) > array_length(_array1)){
+		array_push(_array1, "0");
+	}
+	while (array_length(_array1) > array_length(_array2)){
+		array_push(_array2, "0");
+	}
+
+	for(var i = 0; i < array_length(_array2); i++){
+		if (_array2[i] > _array1[i]){
+			return 0;
+		} 
+		if (_array1[i] > _array2[i]){
+			return 1;
+		}
+	}
+	
+	if (array_equals(_array1, _array2)){
+		return -1;
+	}
+	
+	return 1;
+}
+

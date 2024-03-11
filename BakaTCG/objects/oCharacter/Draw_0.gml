@@ -1,5 +1,6 @@
 draw_set_color(c_white);
 draw_sprite_ext(cardSpriteIndex,cardImageIndex,x+spriteOffsetX,y+spriteOffsetY+z,image_xscale,image_yscale,image_angle,image_blend,image_alpha);
+draw_sprite_ext(cardEIcon,0,x+spriteOffsetX+sprite_get_width(cardSpriteIndex)*image_xscale-2-sprite_get_width(cardEIcon)*image_xscale,y+spriteOffsetY+z+2,image_xscale,image_yscale,image_angle,image_blend,image_alpha);
 draw_set_color(cardColor);
 draw_sprite_ext(sprite_index,image_index,x,y+z,image_xscale,image_yscale,image_angle,cardColor,image_alpha);
 var scribble_object = scribble($"[fa_center][fa_middle][fBig]{name}");
@@ -23,7 +24,7 @@ draw_set_color(c_black);
 draw_circle(x+_circleX,y+z+_circleY,_circleRadius,false);
 draw_set_color(c_white);
 draw_circle(x+_circleX,y+z+_circleY,_circleRadius,true);
-scribble($"[fa_center][fa_middle][c_white][fSmall]{hp}").draw(x+_circleX,y+z+_circleY);
+scribble($"[fa_center][fa_middle][c_white][fSmall]{hp}").draw(x+_circleX+1,y+z+_circleY+1);
 if (!hovered) && (!selected){
 	draw_set_color(c_black);
 	draw_set_alpha(image_alpha/12);
@@ -55,7 +56,7 @@ if (selected){
 	draw_circle(xx+10+_circleX,yy+10+_circleY,_circleRadius,false);
 	draw_set_color(c_white);
 	draw_circle(xx+10+_circleX,yy+10+_circleY,_circleRadius,true);
-	scribble($"[fa_center][fa_middle][c_white][fSmall]{hp}").draw(xx+10+_circleX,yy+10+_circleY);
+	scribble($"[fa_center][fa_middle][c_white][fSmall]{hp}").draw(xx+10+_circleX+1,yy+10+_circleY+1);
 	
 	// Card Name
 	scribble($"[fa_left][fa_top][c_amaranth][fBig]{name}").draw(xx+10,yy+sprite_height+20);
@@ -70,6 +71,11 @@ if (selected){
 	
 	// Card Element
 	scribble($"[alpha,0.5][fLight]{typeString} element").draw(xx+sprite_width+20,yy+10)
+	
+	// Card Element Icon
+	draw_set_color(c_white);
+	draw_set_alpha(1);
+	draw_sprite(cardEIcon, 0, 32*_boxXScale+xx-sprite_get_width(cardEIcon),yy)
 	
 	// Skills
 	var _skillYScale = 3;

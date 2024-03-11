@@ -1,4 +1,11 @@
 #region Initialize Globals
+global.RPState = "In the main menu";
+global.RPDetails = "";
+global.RPBigImage = "tcg";
+global.RPSmallImage = "";
+global.RPBigImageText = "BakaTCG";
+global.RPSmallImageText = "";
+
 global.hand = [];
 global.currentCharacters = [];
 global.currentEnemyCharacters = [];
@@ -116,3 +123,8 @@ musicTextTimer = musicTextTimerLength;
 switch_state(STATE.MENU_MAIN);
 
 stateFunction = function(){}
+
+if !DEBUG_MODE instance_create_layer(x,y,layer,oRichPresence);
+
+updatePopupShowed = false;
+alarm_set(1, 1);

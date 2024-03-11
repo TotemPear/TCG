@@ -22,4 +22,8 @@ for (var i = 0; i < menu_items; i++){
 	draw_text_scribble(xx,yy,_txt);
 }
 
-draw_set_font(fDefault);
+draw_set_font(fBig)
+draw_set_color(c_white);
+draw_set_halign(fa_left);
+draw_set_valign(fa_bottom);
+draw_text(8,room_height,$"v{GM_version}-{SUB_VERSION}");

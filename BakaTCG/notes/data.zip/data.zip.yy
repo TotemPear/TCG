@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"",
+  "%Name":"data.zip",
+  "name":"data.zip",
+  "parent":{
+    "name":"BakaTCG",
+    "path":"BakaTCG.yyp",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}
