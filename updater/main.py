@@ -59,8 +59,12 @@ if __name__ == "__main__":
                         update.extract()
                     except zipfile.BadZipfile:
                         remove(directory + "download.zip")
-
-            if not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
+            file_list = ["data/data.win","data/options.ini","data/audiogroup1.dat","NekoPresence_x64.dll"]
+            file_missing = False
+            for file in file_list:
+                if not isfile(directory + file):
+                    file_missing = True
+            if file_missing:
                 will_download = True
             else:
                 try:
