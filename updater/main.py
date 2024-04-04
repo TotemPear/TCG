@@ -36,6 +36,8 @@ will_download = False
 
 directory = "C:/Users/" + getuser() + "/AppData/Local/BakaTCG/"
 
+file_list = ["data/data.win","data/options.ini","data/audiogroup1.dat","data/NekoPresence_x64.dll"]
+
 has_downloaded = False
 
 extracted = False
@@ -59,13 +61,13 @@ if __name__ == "__main__":
                         update.extract()
                     except zipfile.BadZipfile:
                         remove(directory + "download.zip")
-            file_list = ["data/data.win","data/options.ini","data/audiogroup1.dat","NekoPresence_x64.dll"]
             file_missing = False
             for file in file_list:
                 if not isfile(directory + file):
                     file_missing = True
             if file_missing:
                 will_download = True
+                file_missing = False
             else:
                 try:
                     startfile(directory + "data/" + game_name)
@@ -79,6 +81,11 @@ if __name__ == "__main__":
     else:
         while True:
 
+            file_missing = False
+            for file in file_list:
+                if not isfile(directory + file):
+                    file_missing = True
+            
             if not any(p.name() == "TCG.exe" for p in process_iter()):
                 if isfile(directory + "download.zip"):
                     try:
@@ -87,8 +94,9 @@ if __name__ == "__main__":
                         remove(directory + "download.zip")
                 if not isdir(directory + "data/"):
                     will_download = True
-                elif not isfile(directory + "data/data.win") or not isfile(directory + "data/options.ini"):
+                elif file_missing:
                     will_download = True
+                    file_missing = False
                 elif not game_started:
                     try:
                         startfile(directory + "data/" + game_name)
