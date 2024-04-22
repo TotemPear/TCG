@@ -10,6 +10,8 @@ global.state = STATE.MENU_MAIN;
 global.againstAI = false;
 global.username = "Guest" = string(irandom_range(0,9999))
 global.logedIn = false;
+
+global.connected = os_is_network_connected();
 #endregion
 hoveredID = noone;
 #region Music
@@ -113,6 +115,7 @@ musicTextTimer = musicTextTimerLength;
 
 #endregion
 
-switch_state(STATE.MENU_MAIN);
+if (DEBUG_MODE)	switch_state(STATE.GAME_MAIN)
+else switch_state(STATE.MENU_MAIN);
 
 stateFunction = function(){}

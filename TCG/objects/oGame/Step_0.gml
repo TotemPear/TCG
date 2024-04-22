@@ -3,6 +3,17 @@ if (keyboard_check_pressed(ord("R"))){
 }
 
 var _currenthovered = get_hovered();
+if (_currenthovered != noone){
+	while (!instance_exists(_currenthovered)){
+		for (var i = 0; i < array_length(global.hoveredObjects); i++){
+			if (global.hoveredObjects[i] == _currenthovered){
+				array_delete(global.hoveredObjects,i,1);
+			}
+		}
+		var _currenthovered = get_hovered();
+	}
+	show_debug_message(_currenthovered);
+}
 if (_currenthovered != hoveredID){
 	variable_instance_set(hoveredID,"hovered", false);
 	hoveredID = _currenthovered;

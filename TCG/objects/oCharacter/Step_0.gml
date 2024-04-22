@@ -38,14 +38,19 @@ if (status == 0){
 		targetX = distribute(sprite_width*3*1.2,handPosition,3,cardPositionCenter) - sprite_width/2;
 	}
 	status = 1;
+} else if (status == 1){
+	x = lerp(x, targetX, moveSpeed);
+	y = lerp(y, targetY, moveSpeed);
+	z = lerp(z, targetZ, 0.1);
+
+	hoverable = (abs(x - targetX) <= 16) && (abs(y - targetY) <= 16);
+	selectable = hoverable;
+} else if (state == 2){
+	if (skills[usingSkill].dmg > 0){
+		skillProgress = 0;
+	} else{
+		print("IDK THIS SKILL DOESNT DO DAMAGE BRO");
+	}
 }
-
-x = lerp(x, targetX, moveSpeed);
-y = lerp(y, targetY, moveSpeed);
-z = lerp(z, targetZ, 0.1);
-
-hoverable = (abs(x - targetX) <= 16) && (abs(y - targetY) <= 16);
-selectable = hoverable;
-
 
 //show_debug_message($"{handPosition} - {name}");

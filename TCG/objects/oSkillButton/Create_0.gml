@@ -12,6 +12,8 @@ cost2 = characterID.skills[skillID].cost2;
 dmg = characterID.skills[skillID].dmg;
 charge = characterID.skills[skillID].charge;
 aoe = characterID.skills[skillID].aoe;
+type = characterID.type;
+
 
 status = 0;
 

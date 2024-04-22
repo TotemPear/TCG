@@ -1,0 +1,26 @@
+{
+  "$GMSound":"",
+  "%Name":"mJazz00",
+  "audioGroupId":{
+    "name":"audiogroup_music",
+    "path":"audiogroups/audiogroup_music",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "ConfigValues":{},
+  "conversionMode":0,
+  "duration":293.997,
+  "name":"mJazz00",
+  "parent":{
+    "name":"Music",
+    "path":"folders/Music.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"mJazz00.ogg",
+  "type":0,
+  "volume":1.0,
+}

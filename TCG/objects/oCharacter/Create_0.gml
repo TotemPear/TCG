@@ -10,7 +10,10 @@ moveSpeed = 0.05;
 startDepth = depth;
 spriteOffsetX = 1;
 spriteOffsetY = 1;
+usingSkill = -1;
+skillProgress = 0;
 
+cardPositionCenter = 0;
 cardPositionCenter = room_width/2;
 maxWidth = sprite_width*4;
 
@@ -169,6 +172,7 @@ switch(cardID){
 	];
 	break;
 }
+<<<<<<< Updated upstream:TCG/objects/oCharacter/Create_0.gml
 switch(type){
 	case ELEMENT.BOZO: default:
 	cardColor = c_maroon;
@@ -181,6 +185,17 @@ switch(type){
 	case ELEMENT.OLD:
 	cardColor = c_green;
 	typeString = "Old";
+=======
+
+if (type >= 0) && (type <= 8){
+	cardColor = global.elementColours[type];
+	cardEIcon = global.elementIcons[type];
+	typeString = global.elementNames[type];
+} else{
+	cardColor = c_white;
+	cardEIcon = sPlaceholder;
+	typeString = "No element";
+>>>>>>> Stashed changes:BakaTCG/objects/oCharacter/Create_0.gml
 }
 
 for (var i = 0; i < array_length(skills); i++){
