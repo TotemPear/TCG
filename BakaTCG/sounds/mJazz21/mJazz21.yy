@@ -8,11 +8,7 @@
   "bitDepth":1,
   "bitRate":128,
   "compression":0,
-  "ConfigValues":{
-    "Debug":{
-      "audioGroupId":"{\"name\":\"audiogroup_music\",\"path\":\"audiogroups/audiogroup_music\"}",
-    },
-  },
+  "ConfigValues":{},
   "conversionMode":0,
   "duration":259.86612,
   "name":"mJazz21",

@@ -25,25 +25,41 @@ enum ELEMENT{
 	DAVID
 }
 
-#macro COLOR_GIGACHAD c_silver
-#macro COLOR_BOZO c_maroon
-#macro COLOR_DUMBASS c_aqua
-#macro COLOR_OLD c_green
-#macro COLOR_4 c_white // Placeholder \
-#macro COLOR_5 c_white //              |
-#macro COLOR_6 c_white //             /
-#macro COLOR_OMNI c_white
-#macro COLOR_DAVID c_white
+global.elementColours = [
+	c_silver, // 0
+	c_maroon, // 1
+	c_aqua,   // 2
+	c_green,  // 3    _____________
+	c_white,  // 4---/             \
+	c_white,  // 5---| Placeholder |
+	c_white,  // 6---\_____________/
+	c_white,  // 7
+	c_white   // 8
+];
 
-#macro ICON_GIGACHAD sIconGigachad
-#macro ICON_BOZO sIconBozo
-#macro ICON_DUMBASS sPlaceholder
-#macro ICON_OLD sIconOld
-#macro ICON_4 sPlaceholder
-#macro ICON_5 sPlaceholder
-#macro ICON_6 sPlaceholder
-#macro ICON_DAVID sPlaceholder
+global.elementIcons = [
+	sIconGigachad, // 0
+	sIconBozo,     // 1
+	sPlaceholder,  // 2
+	sIconOld,      // 3
+	sPlaceholder,  // 4
+	sPlaceholder,  // 5
+	sPlaceholder,  // 6
+	sPlaceholder,  // 7
+	sPlaceholder   // 8
+];
 
+global.elementNames = [
+	"Gigachad",
+	"Bozo",
+	"Dumb",
+	"Old",
+	"e4",
+	"e5",
+	"e6",
+	"Omni",
+	"David"
+]
 
 enum STATE {
 	MENU_MAIN,
@@ -61,7 +77,8 @@ enum STATE {
 
 #macro DEBUG_MODE false
 #macro Debug:DEBUG_MODE true
-if (!DEBUG_MODE){
+
+if (false){
 	audio_group_load(audiogroup_music);
 }
 

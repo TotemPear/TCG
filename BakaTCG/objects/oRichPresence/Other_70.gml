@@ -13,7 +13,7 @@ if (ev_type == "DiscordReady")
 	np_setpresence_more(global.RPSmallImageText, global.RPBigImageText, false);
 	
 	// bruh
-	np_setpresence_buttons(0, "Get the game", "https://github.com/TotemPear/TCG/releases/download/v0.0.4-alpha/BakaTCG-Installer.zip");
+	//np_setpresence_buttons(0, "Get the game", "https://github.com/TotemPear/TCG/releases/download/v0.0.4-alpha/BakaTCG-Installer.zip");
 	//np_setpresence_buttons(1, "Russian Facebook", "https://vk.com/");
 	// DISCORD_MAX_BUTTONS == 2, so only allowed IDs are 0 and 1.
 	

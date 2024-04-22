@@ -10,7 +10,10 @@ moveSpeed = 0.05;
 startDepth = depth;
 spriteOffsetX = 1;
 spriteOffsetY = 1;
+usingSkill = -1;
+skillProgress = 0;
 
+cardPositionCenter = 0;
 cardPositionCenter = room_width/2;
 maxWidth = sprite_width*4;
 
@@ -25,7 +28,6 @@ description = "Default Description";
 signature = "Default Signature"
 skills = {name : "Default Skill", description : "Default Description"};
 switch(cardID){
-	#region Solomon
 	case CHARACTER.SOLOMON:
 	name = "Solomon";
 	type = ELEMENT.BOZO;
@@ -53,7 +55,7 @@ switch(cardID){
 		},
 		{
 			name : "Stare Down",
-			description : "Stares with his beautiful gaze into the [c_red]enemies[/c] eyes, making them [#FF007F]horny[/c]. They are [c_aqua]unable to play for 3 turns",
+			description : "Stares, with his beautiful gaze into the [c_red]enemies[/c] eyes, making them [#FF007F]horny[/c]. They are [c_aqua]unable to play for 3 turns",
 			cost1 : 2,
 			charge : 3,
 			image_xscale : 2,
@@ -61,8 +63,6 @@ switch(cardID){
 		}
 	];
 	break;
-	#endregion
-	#region Charles
 	case CHARACTER.CHARLES:
 	name = "Charles";
 	type = ELEMENT.DUMBASS;
@@ -99,8 +99,6 @@ switch(cardID){
 		}
 	];
 	break;
-	#endregion
-	#region Abby
 	case CHARACTER.ABBY:
 	name = "Abby";
 	type = ELEMENT.e4;
@@ -137,8 +135,6 @@ switch(cardID){
 		}
 	];
 	break;
-	#endregion
-	#region Kim
 	case CHARACTER.KIM:
 	name = "Kim";
 	type = ELEMENT.OLD;
@@ -175,37 +171,31 @@ switch(cardID){
 		}
 	];
 	break;
-	#endregion
 }
+<<<<<<< Updated upstream:TCG/objects/oCharacter/Create_0.gml
 switch(type){
-	case ELEMENT.BOZO:
-	cardColor = COLOR_BOZO;
-	cardEIcon = ICON_BOZO;
+	case ELEMENT.BOZO: default:
+	cardColor = c_maroon;
 	typeString = "Bozo";
 	break;
-	
 	case ELEMENT.GIGACHAD:
-	cardColor = COLOR_GIGACHAD;
-	cardEIcon = ICON_GIGACHAD;
+	cardColor = c_silver;
 	typeString = "Gigachad";
 	break;
-	
 	case ELEMENT.OLD:
-	cardColor = COLOR_OLD;
-	cardEIcon = ICON_OLD;
+	cardColor = c_green;
 	typeString = "Old";
-	break;
-	
-	case ELEMENT.DUMBASS:
-	cardColor = COLOR_DUMBASS;
-	cardEIcon = ICON_DUMBASS;
-	typeString = "Dumbass";
-	break;
-	
-	default:
+=======
+
+if (type >= 0) && (type <= 8){
+	cardColor = global.elementColours[type];
+	cardEIcon = global.elementIcons[type];
+	typeString = global.elementNames[type];
+} else{
 	cardColor = c_white;
 	cardEIcon = sPlaceholder;
 	typeString = "No element";
+>>>>>>> Stashed changes:BakaTCG/objects/oCharacter/Create_0.gml
 }
 
 for (var i = 0; i < array_length(skills); i++){
