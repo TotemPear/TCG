@@ -26,15 +26,15 @@
   "name":"sSkillBox",
   "nineSlice":{
     "$GMNineSliceData":"",
-    "bottom":6,
+    "bottom":1,
     "enabled":true,
     "guideColour":[4294902015,4294902015,4294902015,4294902015,],
     "highlightColour":1728023040,
     "highlightStyle":1,
-    "left":6,
+    "left":0,
     "resourceType":"GMNineSliceData",
     "resourceVersion":"2.0",
-    "right":6,
+    "right":0,
     "tileMode":[
       1,
       1,

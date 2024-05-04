@@ -8,7 +8,11 @@
   "bitDepth":1,
   "bitRate":128,
   "compression":0,
-  "ConfigValues":{},
+  "ConfigValues":{
+    "Debug":{
+      "audioGroupId":"{\"name\":\"audiogroup_music\",\"path\":\"audiogroups/audiogroup_music\"}",
+    },
+  },
   "conversionMode":0,
   "duration":480.5847,
   "name":"mJazz04",
